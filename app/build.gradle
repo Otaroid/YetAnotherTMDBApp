@@ -87,4 +87,6 @@ dependencies {
 
     //Ticker
     implementation 'com.robinhood.ticker:ticker:2.0.2'
+
+    implementation "androidx.paging:paging-runtime-ktx:3.0.0"
 }

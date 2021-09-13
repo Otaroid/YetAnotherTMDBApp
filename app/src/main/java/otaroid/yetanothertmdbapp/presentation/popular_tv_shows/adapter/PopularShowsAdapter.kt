@@ -3,6 +3,7 @@ package otaroid.yetanothertmdbapp.presentation.popular_tv_shows.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -12,26 +13,34 @@ import com.robinhood.ticker.TickerUtils
 import otaroid.yetanothertmdbapp.R
 import otaroid.yetanothertmdbapp.databinding.ItemPopularTvListBinding
 import otaroid.yetanothertmdbapp.domain.model.TVShow
+import timber.log.Timber
 
 class PopularShowsAdapter() :
-    RecyclerView.Adapter<PopularShowsAdapter.ShowViewHolder>() {
+    PagingDataAdapter<TVShow, PopularShowsAdapter.ShowViewHolder>(SHOW_DIFFER) {
 
     inner class ShowViewHolder(val binding: ItemPopularTvListBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(tvShow: TVShow) {
+            binding.apply {
+                Glide.with(itemView.context).load(tvShow.posterPath).transition(
+                    DrawableTransitionOptions.withCrossFade()
+                ).into(binding.ivPoster)
+                binding.tvShowName.text = tvShow.name
+                binding.tvShowAirDate.text = tvShow.firstAirDate
+                binding.tvRatingPercent.setCharacterLists(TickerUtils.provideAlphabeticalList())
+                binding.tvRatingPercent.text = tvShow.rating.toString()
+                binding.pbRating.progress = tvShow.rating
+                setOnItemClickListener {
+                    onItemClickListener?.let { it(tvShow) }
+                }
 
-    private val differCallBack = object : DiffUtil.ItemCallback<TVShow>() {
-        override fun areItemsTheSame(oldItem: TVShow, newItem: TVShow): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: TVShow, newItem: TVShow): Boolean {
-            return oldItem == newItem
+            }
         }
     }
 
-    val differ = AsyncListDiffer(this, differCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder {
+        Timber.d("onCreateViewHolder!!!!")
         val binding =
             ItemPopularTvListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ShowViewHolder(
@@ -40,28 +49,29 @@ class PopularShowsAdapter() :
     }
 
     override fun onBindViewHolder(holder: ShowViewHolder, position: Int) {
-        val tvShow = differ.currentList[position]
-        holder.apply {
-            Glide.with(holder.itemView.context).load(tvShow.posterPath).transition(
-                DrawableTransitionOptions.withCrossFade()).into(binding.ivPoster)
-            binding.tvShowName.text = tvShow.name
-            binding.tvShowAirDate.text = tvShow.firstAirDate
-            binding.tvRatingPercent.setCharacterLists(TickerUtils.provideAlphabeticalList())
-            binding.tvRatingPercent.text = tvShow.rating.toString()
-            binding.pbRating.progress = tvShow.rating
-            setOnItemClickListener {
-                onItemClickListener?.let { it(tvShow) }
-            }
+        Timber.d("OnBindViewHolder!!!!")
+        val currentItem = getItem(position)
+        if (currentItem != null) {
+            holder.bind(currentItem)
         }
     }
 
-    override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
 
     private var onItemClickListener: ((TVShow) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (TVShow) -> Unit) {
         onItemClickListener = listener
+    }
+
+    companion object {
+        private val SHOW_DIFFER = object : DiffUtil.ItemCallback<TVShow>() {
+            override fun areItemsTheSame(oldItem: TVShow, newItem: TVShow): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: TVShow, newItem: TVShow): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }
