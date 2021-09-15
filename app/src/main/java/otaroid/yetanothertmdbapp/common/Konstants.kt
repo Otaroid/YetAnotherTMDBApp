@@ -5,5 +5,8 @@ object Konstants {
     const val BASE_URL = "https://api.themoviedb.org/3/"
     const val IMAGES_BASE_URL = "https://image.tmdb.org/t/p/w500"
 
+
+
+    
     const val TMDB_STARTING_PAGE_INDEX = 1
 }

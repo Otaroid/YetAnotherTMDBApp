@@ -2,6 +2,10 @@ package otaroid.yetanothertmdbapp.data.remote.dto.tv_details
 
 
 import com.google.gson.annotations.SerializedName
+import otaroid.yetanothertmdbapp.common.Konstants
+import otaroid.yetanothertmdbapp.domain.model.TVShowDetails
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 data class ShowDetailsDTO(
     @SerializedName("backdrop_path")
@@ -67,3 +71,20 @@ data class ShowDetailsDTO(
     @SerializedName("vote_count")
     val voteCount: Int // 11504
 )
+
+fun ShowDetailsDTO.toTVShowDetails(): TVShowDetails {
+
+
+    return TVShowDetails(
+        id = id,
+        name = name,
+        backDropPath = Konstants.IMAGES_BASE_URL + backdropPath,
+        posterPath = Konstants.IMAGES_BASE_URL + posterPath,
+        airDate = if (lastAirDate.length > 4) firstAirDate.take(4) + lastAirDate.take(4) else firstAirDate.take(
+            4
+        ),
+        tagLine = tagline,
+        overView = overview,
+        voteAverage = voteAverage.times(10).toInt()
+    )
+}

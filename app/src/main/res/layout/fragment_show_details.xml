@@ -1,202 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_color"
-    app:layoutDescription="@xml/fragment_show_details_scene"
-    tools:context=".presentation.show_details.ShowDetailsFragment">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_cover"
-        android:layout_width="0dp"
-        android:layout_height="350dp"
-        android:adjustViewBounds="true"
-        android:alpha="0.7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:background="@drawable/ic_launcher_background" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_poster"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:clickable="true"
-        android:clipChildren="true"
-        android:clipToPadding="true"
-        android:elevation="0dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_cover"
-        app:layout_constraintDimensionRatio="9:16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.35">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginBottom="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color"
+        app:layoutDescription="@xml/fragment_show_details_scene"
+        tools:context=".presentation.show_details.ShowDetailsFragment">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToOutline="true"
+            android:id="@+id/iv_cover"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:adjustViewBounds="true"
+            android:alpha="0.7"
             android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-    </androidx.cardview.widget.CardView>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/ic_launcher_background" />
 
-    <TextView
-        android:id="@+id/tv_show_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/source_sans_pro"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/cv_poster"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Bug Life The TV Show" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_poster"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            android:elevation="0dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.40">
 
-    <TextView
-        android:id="@+id/tv_show_genre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/source_sans_pro"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/tv_show_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_show_name"
-        tools:text="Sci-Fi, Drama, Documentary" />
+            <ImageView
+                android:id="@+id/iv_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/iv_circular_rating_bg"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:background="@drawable/circle"
-        android:elevation="2dp"
-        app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintStart_toStartOf="@id/tv_show_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_show_genre" />
+        <TextView
+            android:id="@+id/tv_show_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/cv_poster"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Bug Life The TV Show" />
 
-    <ProgressBar
-        android:id="@+id/pb_rating"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="-6dp"
-        android:layout_marginTop="-6dp"
-        android:layout_marginEnd="-6dp"
-        android:layout_marginBottom="-6dp"
-        android:elevation="8dp"
-        android:indeterminateOnly="false"
-        android:padding="0dp"
-        android:progress="60"
-        android:progressDrawable="@drawable/progress_circle"
-        app:layout_constraintBottom_toBottomOf="@id/iv_circular_rating_bg"
-        app:layout_constraintEnd_toEndOf="@id/iv_circular_rating_bg"
-        app:layout_constraintStart_toStartOf="@id/iv_circular_rating_bg"
-        app:layout_constraintTop_toTopOf="@id/iv_circular_rating_bg" />
+        <TextView
+            android:id="@+id/tv_show_genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_show_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_show_name"
+            tools:text="Sci-Fi, Drama, Documentary" />
 
-    <com.robinhood.ticker.TickerView
-        android:id="@+id/tv_rating_percent"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="6dp"
-        android:elevation="4dp"
-        android:fontFamily="@font/source_sans_pro"
-        android:gravity="center"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@id/pb_rating"
-        app:layout_constraintEnd_toEndOf="@id/pb_rating"
-        app:layout_constraintStart_toStartOf="@id/pb_rating"
-        app:layout_constraintTop_toTopOf="@id/pb_rating"
-        app:ticker_animationDuration="1500"
-        tools:text="@string/percent" />
+        <ImageView
+            android:id="@+id/iv_circular_rating_bg"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/circle"
+            android:elevation="2dp"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintStart_toEndOf="@id/cv_poster"
+            app:layout_constraintTop_toBottomOf="@id/tv_show_genre" />
 
-    <TextView
-        android:id="@+id/tv_user_score_label"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:fontFamily="@font/source_sans_pro"
-        android:gravity="center"
-        android:text="@string/user_score"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/iv_circular_rating_bg"
-        app:layout_constraintStart_toEndOf="@id/iv_circular_rating_bg"
-        app:layout_constraintTop_toTopOf="@id/iv_circular_rating_bg" />
+        <ProgressBar
+            android:id="@+id/pb_rating"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="-6dp"
+            android:layout_marginTop="-6dp"
+            android:layout_marginEnd="-6dp"
+            android:layout_marginBottom="-6dp"
+            android:elevation="8dp"
+            android:indeterminateOnly="false"
+            android:padding="0dp"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_circle"
+            app:layout_constraintBottom_toBottomOf="@id/iv_circular_rating_bg"
+            app:layout_constraintEnd_toEndOf="@id/iv_circular_rating_bg"
+            app:layout_constraintStart_toStartOf="@id/iv_circular_rating_bg"
+            app:layout_constraintTop_toTopOf="@id/iv_circular_rating_bg" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_to_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/fab_bg"
-        app:fabCustomSize="42dp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_user_score_label"
-        app:layout_constraintStart_toEndOf="@id/tv_user_score_label"
-        app:layout_constraintTop_toTopOf="@id/tv_user_score_label"
-        app:srcCompat="@drawable/ic_add_to_list"
-        app:tint="@android:color/white" />
+        <com.robinhood.ticker.TickerView
+            android:id="@+id/tv_rating_percent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="6dp"
+            android:elevation="4dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:gravity="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/pb_rating"
+            app:layout_constraintEnd_toEndOf="@id/pb_rating"
+            app:layout_constraintStart_toStartOf="@id/pb_rating"
+            app:layout_constraintTop_toTopOf="@id/pb_rating"
+            app:ticker_animationDuration="2500"
+            tools:text="@string/percent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_to_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/fab_bg"
-        app:fabCustomSize="42dp"
-        app:layout_constraintBottom_toBottomOf="@id/fab_add_to_list"
-        app:layout_constraintStart_toEndOf="@id/fab_add_to_list"
-        app:layout_constraintTop_toTopOf="@id/fab_add_to_list"
-        app:srcCompat="@drawable/ic_favorite"
-        app:tint="@android:color/white" />
+        <TextView
+            android:id="@+id/tv_user_score_label"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:gravity="center"
+            android:text="@string/user_score"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_circular_rating_bg"
+            app:layout_constraintStart_toEndOf="@id/iv_circular_rating_bg"
+            app:layout_constraintTop_toTopOf="@id/iv_circular_rating_bg"
+            app:layout_goneMarginStart="4dp" />
 
-    <TextView
-        android:id="@+id/tv_tagline"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/iv_circular_rating_bg"
-        app:layout_constraintTop_toBottomOf="@id/iv_circular_rating_bg"
-        tools:text="Bugs are everywhere, even in this code" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_to_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:backgroundTint="@color/fab_bg"
+            app:fabCustomSize="42dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_user_score_label"
+            app:layout_constraintStart_toEndOf="@id/tv_user_score_label"
+            app:layout_constraintTop_toTopOf="@id/tv_user_score_label"
+            app:layout_goneMarginStart="4dp"
+            app:srcCompat="@drawable/ic_add_to_list"
+            app:tint="@android:color/white" />
 
-    <TextView
-        android:id="@+id/tv_overview_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/source_sans_pro"
-        android:text="@string/overview"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/tv_tagline"
-        app:layout_constraintTop_toBottomOf="@id/tv_tagline" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_to_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:backgroundTint="@color/fab_bg"
+            app:fabCustomSize="42dp"
+            app:layout_constraintBottom_toBottomOf="@id/fab_add_to_list"
+            app:layout_constraintStart_toEndOf="@id/fab_add_to_list"
+            app:layout_constraintTop_toTopOf="@id/fab_add_to_list"
+            app:layout_goneMarginStart="4dp"
+            app:srcCompat="@drawable/ic_favorite"
+            app:tint="@android:color/white" />
 
-    <TextView
-        android:id="@+id/tv_overview_text"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/source_sans_pro"
-        android:maxLines="7"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_cover"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/tv_tagline"
-        app:layout_constraintTop_toBottomOf="@id/tv_overview_label"
-        tools:text="@tools:sample/lorem/random" />
+        <TextView
+            android:id="@+id/tv_tagline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/iv_circular_rating_bg"
+            app:layout_constraintTop_toBottomOf="@id/iv_circular_rating_bg"
+            tools:text="Bugs are everywhere, even in this code" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="380dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_cover"
-        tools:listitem="@layout/item_popular_tv_list" />
-</androidx.constraintlayout.motion.widget.MotionLayout>
+        <TextView
+            android:id="@+id/tv_overview_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="@string/overview"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_tagline"
+            app:layout_constraintTop_toBottomOf="@id/tv_tagline" />
+
+        <TextView
+            android:id="@+id/tv_overview_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/source_sans_pro"
+            android:maxLines="7"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_tagline"
+            app:layout_constraintTop_toBottomOf="@id/tv_overview_label"
+            tools:text="@tools:sample/lorem/random" />
+
+        <TextView
+            android:id="@+id/label_cast"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="@string/cast"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_cast"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_cast"
+            tools:listitem="@layout/item_popular_tv_list" />
+
+        <TextView
+            android:id="@+id/similar_movies"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="@string/similar_movies"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_cast" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_similar"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+
+            android:clipToPadding="true"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/similar_movies" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

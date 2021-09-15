@@ -1,4 +1,4 @@
-package otaroid.yetanothertmdbapp.presentation.popular_tv_shows.adapter
+package otaroid.yetanothertmdbapp.presentation.main_tv_shows.adapter
 
 import android.graphics.Rect
 import android.view.View

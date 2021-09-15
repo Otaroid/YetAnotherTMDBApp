@@ -5,4 +5,7 @@
     <string name="percent">$d%</string>
     <string name="user_score">User\nScore</string>
     <string name="overview">Overview</string>
+    <string name="retry">Retry</string>
+    <string name="cast">Cast</string>
+    <string name="similar_movies">Similar Movies</string>
 </resources>

@@ -13,14 +13,14 @@ import otaroid.yetanothertmdbapp.domain.model.TVShow
 import otaroid.yetanothertmdbapp.domain.repository.TVShowsRepository
 import javax.inject.Inject
 
-class GetPopularShowsUseCase @Inject constructor(
+class GetSimilarShowsUseCase constructor(
     private val repository: TVShowsRepository,
-
+    private val tvId :Int
 ) {
     operator fun invoke(): Flow<PagingData<TVShow>> = Pager(
         config = PagingConfig(pageSize = 10, maxSize = 100, enablePlaceholders = false),
         pagingSourceFactory = {
-            TvShowPagingSource(repository, TMdbRequestType.PopularTV())
+            TvShowPagingSource(repository, TMdbRequestType.SimilarTV(tvId))
         }
     ).flow.map { pagingData ->
         pagingData.map { tv ->

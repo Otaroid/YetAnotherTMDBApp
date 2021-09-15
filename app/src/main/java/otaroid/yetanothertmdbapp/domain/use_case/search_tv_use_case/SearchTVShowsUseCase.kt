@@ -1,4 +1,4 @@
-package otaroid.yetanothertmdbapp.domain.use_case.get_popular_tv_show
+package otaroid.yetanothertmdbapp.domain.use_case.search_tv_use_case
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -13,18 +13,20 @@ import otaroid.yetanothertmdbapp.domain.model.TVShow
 import otaroid.yetanothertmdbapp.domain.repository.TVShowsRepository
 import javax.inject.Inject
 
-class GetPopularShowsUseCase @Inject constructor(
+class SearchTVShowsUseCase @Inject constructor(
     private val repository: TVShowsRepository,
-
+    private val searchQuery: String,
 ) {
     operator fun invoke(): Flow<PagingData<TVShow>> = Pager(
         config = PagingConfig(pageSize = 10, maxSize = 100, enablePlaceholders = false),
         pagingSourceFactory = {
-            TvShowPagingSource(repository, TMdbRequestType.PopularTV())
+            TvShowPagingSource(repository, TMdbRequestType.SearchTV(searchQuery))
         }
     ).flow.map { pagingData ->
         pagingData.map { tv ->
-            tv.toTVShow()
+            tv?.let {
+                tv.toTVShow()
+            }
         }
     }
 }

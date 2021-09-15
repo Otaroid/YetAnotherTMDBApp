@@ -1,22 +1,18 @@
-package otaroid.yetanothertmdbapp.presentation.popular_tv_shows.adapter
+package otaroid.yetanothertmdbapp.presentation.main_tv_shows.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.robinhood.ticker.TickerUtils
-import otaroid.yetanothertmdbapp.R
 import otaroid.yetanothertmdbapp.databinding.ItemPopularTvListBinding
 import otaroid.yetanothertmdbapp.domain.model.TVShow
-import timber.log.Timber
 
-class PopularShowsAdapter() :
-    PagingDataAdapter<TVShow, PopularShowsAdapter.ShowViewHolder>(SHOW_DIFFER) {
+class TVShowsAdapter() :
+    PagingDataAdapter<TVShow, TVShowsAdapter.ShowViewHolder>(SHOW_DIFFER) {
 
     inner class ShowViewHolder(val binding: ItemPopularTvListBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -25,22 +21,33 @@ class PopularShowsAdapter() :
                 Glide.with(itemView.context).load(tvShow.posterPath).transition(
                     DrawableTransitionOptions.withCrossFade()
                 ).into(binding.ivPoster)
-                binding.tvShowName.text = tvShow.name
-                binding.tvShowAirDate.text = tvShow.firstAirDate
-                binding.tvRatingPercent.setCharacterLists(TickerUtils.provideAlphabeticalList())
-                binding.tvRatingPercent.text = tvShow.rating.toString()
-                binding.pbRating.progress = tvShow.rating
-                setOnItemClickListener {
-                    onItemClickListener?.let { it(tvShow) }
+                tvShowName.text = tvShow.name
+                tvShowAirDate.text = tvShow.firstAirDate
+                tvRatingPercent.setCharacterLists(TickerUtils.provideAlphabeticalList())
+                tvRatingPercent.text = tvShow.rating.toString()
+                pbRating.progress = tvShow.rating
+                ivPoster.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(tvShow)
+                    }
                 }
-
+                rootView.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(tvShow)
+                    }
+                }
+//                itemView.rootView.setOnClickListener {
+//                    Timber.d("კლიკი")
+//                    onItemClickListener?.let {
+//                        it(tvShow)
+//                    }
+//                }
             }
         }
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder {
-        Timber.d("onCreateViewHolder!!!!")
         val binding =
             ItemPopularTvListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ShowViewHolder(
@@ -49,10 +56,14 @@ class PopularShowsAdapter() :
     }
 
     override fun onBindViewHolder(holder: ShowViewHolder, position: Int) {
-        Timber.d("OnBindViewHolder!!!!")
         val currentItem = getItem(position)
         if (currentItem != null) {
             holder.bind(currentItem)
+            holder.itemView.setOnClickListener {
+                onItemClickListener?.let {
+                    it(currentItem)
+                }
+            }
         }
     }
 
@@ -62,6 +73,7 @@ class PopularShowsAdapter() :
     fun setOnItemClickListener(listener: (TVShow) -> Unit) {
         onItemClickListener = listener
     }
+
 
     companion object {
         private val SHOW_DIFFER = object : DiffUtil.ItemCallback<TVShow>() {
