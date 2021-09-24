@@ -9,7 +9,7 @@ data class TV(
     @SerializedName("backdrop_path")
     val backdropPath: String, // /rQGBjWNveVeF8f2PGRtS85w9o9r.jpg
     @SerializedName("first_air_date")
-    val firstAirDate: String, // 2010-06-08
+    val firstAirDate: String? = null, // 2010-06-08
     @SerializedName("genre_ids")
     val genreIds: List<Int>,
     @SerializedName("id")
@@ -43,8 +43,8 @@ fun TV.toTVShow(): TVShow {
         overview = overview,
         rating = voteAverage.times(10).toInt(),
         posterPath = IMAGES_BASE_URL + posterPath,
-        backDropPath =IMAGES_BASE_URL + backdropPath,
-        firstAirDate = firstAirDate,
+        backDropPath = IMAGES_BASE_URL + backdropPath,
+        firstAirDate = if (firstAirDate.isNullOrEmpty()) "" else firstAirDate,
     )
 }
 

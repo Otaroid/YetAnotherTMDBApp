@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import otaroid.yetanothertmdbapp.databinding.FragmentPopularShowsBinding
@@ -56,7 +57,7 @@ class PopularShowsFragment : Fragment() {
                             viewModel.searchTVShows(p0)
                         } else {
                             lifecycleScope.launch {
-                                viewModel.popularShows.collectLatest {
+                                viewModel.popularShows.collect {
                                     tvAdapter.submitData(it)
                                 }
                             }
@@ -78,7 +79,7 @@ class PopularShowsFragment : Fragment() {
                                 viewModel.searchTVShows(p0)
                             } else {
                                 lifecycleScope.launch {
-                                    viewModel.popularShows.collectLatest {
+                                    viewModel.popularShows.collect {
 
                                         tvAdapter.submitData(it)
                                     }
@@ -97,19 +98,15 @@ class PopularShowsFragment : Fragment() {
 
             })
 
-            setOnCloseListener(object : SearchView.OnCloseListener{
-                override fun onClose(): Boolean {
-                    lifecycleScope.launch {
-                        viewModel.popularShows.collectLatest {
+            setOnCloseListener {
+                lifecycleScope.launch {
+                    viewModel.popularShows.collectLatest {
 
-                            tvAdapter.submitData(it)
-                        }
+                        tvAdapter.submitData(it)
                     }
-                    return true
                 }
-
-            })
-
+                true
+            }
 
         }
 

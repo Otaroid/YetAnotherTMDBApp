@@ -1,0 +1,13 @@
+language: android
+dist: trusty
+android:
+  components:
+    - build-tools-30.0.2
+    - android-31
+    - extra-google-google-play-services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - sys-img-x86-android-3
+    - add-on
+    - extra
+    
