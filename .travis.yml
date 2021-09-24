@@ -19,6 +19,11 @@ jdk:
 install: true
 before_script:
   - chmod +x gradlew
+  - yes | sdkmanager "platforms;android-31"
+after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
+
+script:
+   - ./gradlew build connectedCheck
 
   
     
