@@ -46,8 +46,6 @@ Papp/src/main/java/otaroid/yetanothertmdbapp/data/remote/dto/tv_details/Season.k
 Xapp/src/main/java/otaroid/yetanothertmdbapp/data/remote/dto/tv_details/SpokenLanguage.kt,6/e/6eb1131e8ed3319c4a0d1625ce981f342b611ac1
 f
 6app/src/main/java/otaroid/yetanothertmdbapp/TMDBApp.kt,d/9/d9401b9868e72f8e2f04fbfbbd34eb13073f9ed6
-<
-build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
 €
 Papp/src/main/java/otaroid/yetanothertmdbapp/data/remote/dto/popular/TVShowDTO.kt,b/e/be6437d76748b2422f90cf2508bcb2347a626481
 r
