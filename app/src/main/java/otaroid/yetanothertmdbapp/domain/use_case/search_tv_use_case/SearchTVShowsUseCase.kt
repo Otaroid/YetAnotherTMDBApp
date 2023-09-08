@@ -23,10 +23,8 @@ class SearchTVShowsUseCase @Inject constructor(
             TvShowPagingSource(repository, TMdbRequestType.SearchTV(searchQuery))
         }
     ).flow.map { pagingData ->
-        pagingData.map { tv ->
-            tv?.let {
-                tv.toTVShow()
-            }
+        pagingData.map {
+            it.toTVShow()
         }
     }
 }
